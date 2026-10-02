@@ -1,0 +1,125 @@
+﻿@model FarmaciaNuevaVida.Models.Producto
+
+@{
+    ViewData["Title"] = "Producto registrado";
+
+
+string bodega = "";
+
+
+}
+
+@switch (Model.Tipo)
+{
+    case "Natural":
+        bodega = "Bodega 1";
+        break;
+
+
+case "Químico":
+        bodega = "Bodega 2";
+        break;
+
+    case "Líquido":
+        bodega = "Bodega 3";
+        break;
+
+    default:
+        bodega = "Sin bodega asignada";
+        break;
+
+
+}
+
+<div class="container py-5">
+
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h2 class="mb-1">✓ Producto registrado</h2>
+                    <p class="mb-0">
+                        El producto fue recibido correctamente.
+                    </p>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+
+                    <h4 class="text-center mb-4">
+                        Información del producto
+                    </h4>
+
+                    <div class="list-group mb-4">
+
+                        <div class="list-group-item d-flex justify-content-between">
+                            <strong>Nombre:</strong>
+                            <span>@Model.Nombre</span>
+                        </div>
+
+                        <div class="list-group-item d-flex justify-content-between">
+                            <strong>Tipo:</strong>
+                            <span>@Model.Tipo</span>
+                        </div>
+
+                        <div class="list-group-item d-flex justify-content-between">
+                            <strong>Cantidad:</strong>
+                            <span>@Model.Cantidad</span>
+                        </div>
+
+                        <div class="list-group-item d-flex justify-content-between">
+                            <strong>Precio unitario:</strong>
+                            <span>₡@Model.PrecioUnitario.ToString("N2")</span>
+                        </div>
+
+                        <div class="list-group-item d-flex justify-content-between">
+                            <strong>Bodega:</strong>
+                            <span>@bodega</span>
+                        </div>
+
+                    </div>
+
+                    @if (Model.Cantidad < 20)
+                    {
+                        <div class="alert alert-warning text-center">
+                            <strong>⚠ Cantidad limitada</strong>
+                            <br />
+                            La cantidad de este producto es inferior a 20.
+                            Se recomienda solicitar una nueva cantidad.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success text-center">
+                            <strong>✓ Cantidad disponible</strong>
+                            <br />
+                            La cantidad registrada no es inferior a 20.
+                        </div>
+                    }
+
+                    <div class="text-center mt-4">
+
+                        <a asp-action="Registrar"
+                           class="btn btn-primary me-2">
+                            Registrar otro producto
+                        </a>
+
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary">
+                            Volver al inicio
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+</div>
+
